@@ -1,0 +1,8 @@
+{
+  "python.defaultInterpreterPath": "/Users/karanchauhan/Desktop/scraper/venv/bin/python3.11",
+  "python.analysis.extraPaths": [
+    "/Users/karanchauhan/Desktop/scraper/venv/lib/python3.11/site-packages"
+  ],
+  "python.envFile": "",
+  "python.pythonPath": "/Users/karanchauhan/Desktop/scraper/venv/bin/python3.11"
+}

@@ -1,0 +1,2 @@
+[tool.knot.environment]
+python = "./venv"
