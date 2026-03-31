@@ -1,4 +1,4 @@
-# 🛒 Product Review Scraper & LLM Sentiment Analyzer
+#  Product Review Scraper & LLM Sentiment Analyzer
 
 A robust Python CLI application that scrapes product reviews from Amazon, preprocesses the text, and uses an OpenAI-compatible LLM to generate sentiment analysis and summaries for each review.
 
