@@ -2,7 +2,7 @@
 
 A robust Python CLI application that scrapes product reviews from Amazon, preprocesses the text, and uses an OpenAI-compatible LLM to generate sentiment analysis and summaries for each review.
 
-## 📌 Chosen Product URL for Testing
+##  Chosen Product URL for Testing
 
 ```
 https://www.amazon.com/dp/B09V3KXJPB
@@ -14,7 +14,7 @@ https://www.amazon.com/dp/B09V3KXJPB
 
 ---
 
-## 🚀 Quick Start
+##  Quick Start
 
 ### 1. Clone & install dependencies
 
@@ -87,7 +87,7 @@ python main.py --local-html reviews.html
 
 ---
 
-## 🧪 Testing with Local HTML
+##  Testing with Local HTML
 
 Since Amazon aggressively blocks automated scrapers, you can test with saved HTML:
 
@@ -100,7 +100,7 @@ Since Amazon aggressively blocks automated scrapers, you can test with saved HTM
 
 ---
 
-## 🏗️ Architecture
+##  Architecture
 
 ```
 scraper/
@@ -127,7 +127,7 @@ Console Summary ← Storage ← Enriched Reviews ← LLM Analyzer
 
 ---
 
-## 🔧 Design Choices
+##  Design Choices
 
 ### Scraping Strategy
 - **Rotating User-Agents**: 5 different browser signatures to reduce blocking
@@ -155,7 +155,7 @@ Console Summary ← Storage ← Enriched Reviews ← LLM Analyzer
 
 ---
 
-## 📊 Output Format
+##  Output Format
 
 ### JSON (`output/reviews.json`)
 ```json
@@ -188,7 +188,7 @@ Includes a formatted table and sentiment distribution chart.
 
 ---
 
-## ⚠️ Limitations
+## Limitations
 
 1. **Amazon anti-bot protection**: Amazon may block requests or serve CAPTCHAs. Use `--local-html` as a reliable fallback.
 2. **Review format changes**: If Amazon changes their HTML structure, the CSS selectors in `scraper.py` may need updating.
@@ -198,6 +198,6 @@ Includes a formatted table and sentiment distribution chart.
 
 ---
 
-## 📄 License
+##  License
 
 MIT
