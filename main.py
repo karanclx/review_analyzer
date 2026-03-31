@@ -131,11 +131,11 @@ def main() -> int:
     logger = logging.getLogger("main")
 
     print("\n╔══════════════════════════════════════════════════════════════╗")
-    print("║     🛒  Product Review Scraper & LLM Analyzer  🤖         ║")
+    print("║         Product Review Scraper & LLM Analyzer            ║")
     print("╚══════════════════════════════════════════════════════════════╝\n")
 
     # ── Step 1: Scrape reviews ───────────────────────────────────────────────
-    print("📥 Step 1: Scraping reviews...")
+    print("Step 1: Scraping reviews...")
 
     try:
         if args.local_html:
@@ -146,43 +146,43 @@ def main() -> int:
             reviews = scrape_reviews(args.url, max_pages=args.max_pages)
     except FileNotFoundError as e:
         logger.error(f"File not found: {e}")
-        print(f"\n❌ Error: {e}")
+        print(f"\nError: {e}")
         return 1
     except ValueError as e:
         logger.error(f"Invalid input: {e}")
-        print(f"\n❌ Error: {e}")
+        print(f"\nError: {e}")
         return 1
     except Exception as e:
         logger.error(f"Scraping failed: {e}", exc_info=True)
-        print(f"\n❌ Scraping failed: {e}")
+        print(f"\nScraping failed: {e}")
         return 1
 
     if not reviews:
-        print("\n⚠️  No reviews found. This could be due to:")
+        print("\nNo reviews found. This could be due to:")
         print("   • The page structure has changed")
         print("   • Anti-bot protection blocked the request")
         print("   • The product has no reviews")
         print("   Try using --local-html with a saved HTML file for testing.")
         return 1
 
-    print(f"   ✅ Found {len(reviews)} reviews\n")
+    print(f"   Found {len(reviews)} reviews\n")
 
     # ── Step 2: Preprocess ───────────────────────────────────────────────────
-    print("🧹 Step 2: Preprocessing review text...")
+    print("Step 2: Preprocessing review text...")
 
     reviews = preprocess_reviews(reviews)
     total_tokens = sum(r.get("token_count", 0) for r in reviews)
-    print(f"   ✅ Preprocessed {len(reviews)} reviews ({total_tokens:,} total tokens)\n")
+    print(f"   Preprocessed {len(reviews)} reviews ({total_tokens:,} total tokens)\n")
 
     # ── Step 3: LLM Analysis ────────────────────────────────────────────────
     if args.skip_analysis:
-        print("⏭️  Step 3: Skipping LLM analysis (--skip-analysis flag)\n")
+        print("Step 3: Skipping LLM analysis (--skip-analysis flag)\n")
     else:
         if not OPENAI_API_KEY:
-            print("⚠️  OPENAI_API_KEY not set. Skipping LLM analysis.")
+            print("OPENAI_API_KEY not set. Skipping LLM analysis.")
             print("   Set it via: export OPENAI_API_KEY='your-key-here'\n")
         else:
-            print(f"🤖 Step 3: Analyzing reviews with {args.model}...")
+            print(f"Step 3: Analyzing reviews with {args.model}...")
 
             # Create a tqdm progress bar
             pbar = tqdm(total=len(reviews), desc="   Analyzing", unit="review")
@@ -198,33 +198,33 @@ def main() -> int:
                 )
             except Exception as e:
                 logger.error(f"LLM analysis failed: {e}", exc_info=True)
-                print(f"\n⚠️  LLM analysis error: {e}")
+                print(f"\nLLM analysis error: {e}")
                 print("   Saving scraped data without analysis.\n")
             finally:
                 pbar.close()
 
-            print(f"   ✅ Analysis complete\n")
+            print(f"   Analysis complete\n")
 
     # ── Step 4: Save results ────────────────────────────────────────────────
-    print("💾 Step 4: Saving results...")
+    print("Step 4: Saving results...")
 
     output_dir = Path(args.output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
 
     if args.format in ("json", "both"):
         json_path = save_to_json(reviews, str(output_dir / "reviews.json"))
-        print(f"   📄 JSON: {json_path}")
+        print(f"   JSON: {json_path}")
 
     if args.format in ("csv", "both"):
         csv_path = save_to_csv(reviews, str(output_dir / "reviews.csv"))
-        print(f"   📊 CSV:  {csv_path}")
+        print(f"   CSV:  {csv_path}")
 
     print()
 
     # ── Step 5: Display summary ─────────────────────────────────────────────
     display_summary(reviews)
 
-    print("✅ Done! All results saved to:", str(output_dir.resolve()))
+    print("Done! All results saved to:", str(output_dir.resolve()))
     return 0
 
 

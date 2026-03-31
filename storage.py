@@ -124,17 +124,17 @@ def display_summary(data: list[dict]) -> None:
 
     # Sentiment distribution
     sentiments = [r.get("sentiment", "UNKNOWN") for r in data]
-    print("\n📊 Sentiment Distribution:")
+    print("\nSentiment Distribution:")
     for sentiment in sorted(set(sentiments)):
         count = sentiments.count(sentiment)
         pct = count / len(sentiments) * 100
-        bar = "█" * int(pct / 5)
+        bar = "#" * int(pct / 5)
         print(f"  {sentiment:10s} : {count:3d} ({pct:5.1f}%) {bar}")
 
     # Average rating
     ratings = [r["rating"] for r in data if r.get("rating") is not None]
     if ratings:
         avg = sum(ratings) / len(ratings)
-        print(f"\n⭐ Average Rating: {avg:.1f}/5 (from {len(ratings)} rated reviews)")
+        print(f"\nAverage Rating: {avg:.1f}/5 (from {len(ratings)} rated reviews)")
 
     print()
